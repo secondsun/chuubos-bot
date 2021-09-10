@@ -8,7 +8,7 @@ This is the restful services for the chuubos-bot project. It is a source of trut
 
 # deployment
 
-`./mvnw clean package -Dquarkus.container-image.build=true` will build the container. After that it is simple enough to deploy to openshift
+`./mvnw clean package -Pnative -Dquarkus.container-image.build=true` will build the container. After that it is simple enough to deploy to openshift
 
 # endpoints
 
