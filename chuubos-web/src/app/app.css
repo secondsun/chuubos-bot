@@ -1,0 +1,8 @@
+/* .pf-c-page {
+  --pf-c-page__header--BackgroundColor: #FF0000;
+  --pf-c-page__sidebar--BackgroundColor: #FF0000;
+} */
+
+html, body, #root {
+  height: 100%;
+}
