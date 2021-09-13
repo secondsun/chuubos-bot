@@ -6,11 +6,15 @@ import { Config } from '../utils/Config'
 
 const Dashboard: React.FunctionComponent = () => {
 
-  const apiUrl = Config.getAPIServerURL() || 'http://localhost:8080';
+  
 
   const [connected, setConnected] = useState(false);
 
-  fetch( apiUrl + "/hello").then(value => {value.status == 200 ? setConnected(true): console.log("Error!")});
+  Config.getAPIServerURL().then(apiUrl => {
+    fetch( apiUrl + "/hello").then(value => {value.status == 200 ? setConnected(true): console.log("Error!")});
+  })
+
+  
 
  return ( <PageSection>
     <Title headingLevel="h1" size="lg">{connected?"Connected!":"Not Connected!"}</Title>
