@@ -1,0 +1,49 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: chuubos-web
+  namespace: chuubos-yaml
+  labels:
+    app: chuubos-web
+    app.kubernetes.io/component: chuubos-web
+    app.kubernetes.io/instance: chuubos-web
+    app.kubernetes.io/name: chuubos-web
+    app.kubernetes.io/part-of: chuubos-app
+    app.openshift.io/runtime-namespace: chuubos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chuubos-web
+  template:
+    metadata:
+      labels:
+        app: chuubos-web
+        deploymentconfig: chuubos-web
+    spec:
+      containers:
+        - name: chuubos-web
+          image: >-
+            quay.io/secondsun/chuubos-web:latest4
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: API_HOST
+              value: 'http://chuubos-api-chuubos.apps-crc.testing'    
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+

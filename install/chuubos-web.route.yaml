@@ -1,0 +1,21 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: chuubos-web
+  namespace: chuubos-yaml
+  labels:
+    app: chuubos-web
+    app.kubernetes.io/component: chuubos-web
+    app.kubernetes.io/instance: chuubos-web
+    app.kubernetes.io/name: chuubos-web
+    app.kubernetes.io/part-of: chuubos-app
+    app.openshift.io/runtime-version: latest
+spec:
+  to:
+    kind: Service
+    name: chuubos-web
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  wildcardPolicy: None
+

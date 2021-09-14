@@ -1,0 +1,20 @@
+apiVersion: binding.operators.coreos.com/v1alpha1
+kind: ServiceBinding
+
+metadata:
+  name: api-web-binding
+  namespace: chuubos-yaml
+spec:
+  bindAsFiles: false
+  namingStrategy: "{{ .name | upper }}"
+  application:
+    group: apps
+    resource: deployments
+    name: chuubos-web
+    version: v1
+  services:
+    - group: route.openshift.io
+      version: v1
+      kind: Route
+      name: chuubos-api
+      namespace: chuubos-yaml

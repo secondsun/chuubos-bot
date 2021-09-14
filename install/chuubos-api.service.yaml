@@ -1,0 +1,27 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: chuubos-api
+  namespace: chuubos-yaml
+  labels:
+    app: chuubos-api
+    app.kubernetes.io/component: chuubos-api
+    app.kubernetes.io/instance: chuubos-api
+    app.kubernetes.io/name: chuubos-api
+    app.kubernetes.io/part-of: chuubos-app
+    app.openshift.io/runtime-version: latest
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: chuubos-api
+    deploymentconfig: chuubos-api
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+
